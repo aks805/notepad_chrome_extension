@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  width: 600px;
+  height: 400px;
+  font-family: sans-serif;
+}
+
+#app {
+  display: flex;
+  height: 100%;
+}
+
+.folders, .notes {
+  width: 150px;
+  border-right: 1px solid #ddd;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  padding: 6px;
+  box-sizing: border-box;
+  margin: 6px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0 0;
+}
+
+li {
+  cursor: pointer;
+  padding: 4px;
+  word-wrap: break-word;
+}
+
+li.active {
+  background: #eee;
+}
+
+textarea {
+  width: 100%;
+  height: calc(100% - 32px);
+}
+
+button {
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 4px;
+}
+
