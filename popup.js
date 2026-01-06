@@ -146,6 +146,11 @@ function renderEditor() {
 
   titleInput.disabled = !note;
   contentTextarea.disabled = !note;
+
+  if (folder && !note) {
+    titleInput.disabled = false;
+    titleInput.value = folder?.name;
+  }
 }
 
 document.getElementById("new-folder").onclick = () => {
@@ -180,7 +185,17 @@ document.getElementById("new-note").onclick = () => {
 
 titleInput.addEventListener("input", () => {
   const note = getCurrentNote();
-  if (!note) return;
+  const folder = getCurrentFolder();
+  if (!note) {
+    if (!folder) {
+      return;
+    } else {
+      folder.name = titleInput.value;
+      saveState();
+      renderFolders();
+      return;
+    }
+  }
 
   note.title = titleInput.value;
   note.updatedAt = Date.now();
@@ -200,6 +215,14 @@ contentTextarea.addEventListener("input", () => {
 function getCurrentNote() {
   const folder = state.folders[state.selectedFolderId];
   return folder?.notes[state.selectedNoteId];
+}
+
+function getCurrentFolder() {
+  const folder = state.folders[state.selectedFolderId];
+  if (folder) {
+    return folder;
+  }
+  return undefined;
 }
 
 loadState();
