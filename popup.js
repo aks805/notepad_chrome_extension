@@ -2,6 +2,7 @@ let state = {
   folders: {},
   selectedFolderId: null,
   selectedNoteId: null,
+  searchQuery: null,
 };
 
 const saveState = () => {
@@ -44,6 +45,7 @@ const folderList = document.getElementById("folder-list");
 const noteList = document.getElementById("note-list");
 const titleInput = document.getElementById("note-title");
 const contentTextarea = document.getElementById("note-content");
+const noteSearch = document.getElementById("note-search");
 
 function render() {
   renderFolders();
@@ -99,42 +101,52 @@ function renderNotes() {
   const folder = state.folders[state.selectedFolderId];
   if (!folder) return;
 
-  Object.values(folder.notes)
-    .sort((a, b) => b.updatedAt - a.updatedAt)
-    .forEach((note) => {
-      const li = document.createElement("li");
-      li.textContent = note.title || "Untitled";
-      if (note.id === state.selectedNoteId) li.classList.add("active");
+  let notes = Object.values(folder.notes);
 
-      // Select note on click
-      li.onclick = () => {
-        state.selectedNoteId = note.id;
+  notes.sort((a, b) => b.updatedAt - a.updatedAt);
+
+  if (state.searchQuery) {
+    noteSearch.value = state.searchQuery;
+    // Simple fuzzy filter: all query letters appear in order in title or content
+    notes = notes.filter((note) =>
+      note.title.toLowerCase().includes(state.searchQuery),
+    );
+  }
+
+  notes.forEach((note) => {
+    const li = document.createElement("li");
+    li.textContent = note.title || "Untitled";
+    if (note.id === state.selectedNoteId) li.classList.add("active");
+
+    // Select note on click
+    li.onclick = () => {
+      state.selectedNoteId = note.id;
+      saveState();
+      render();
+    };
+
+    // Delete button
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "🗑️";
+    delBtn.style.marginLeft = "6px";
+    delBtn.onclick = (e) => {
+      e.stopPropagation(); // Prevent selecting note
+      if (confirm(`Delete note "${note.title}"?`)) {
+        delete folder.notes[note.id];
+
+        // Reset selection if deleted note was active
+        if (state.selectedNoteId === note.id) {
+          state.selectedNoteId = Object.keys(folder.notes)[0] || null;
+        }
+
         saveState();
         render();
-      };
+      }
+    };
 
-      // Delete button
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "🗑️";
-      delBtn.style.marginLeft = "6px";
-      delBtn.onclick = (e) => {
-        e.stopPropagation(); // Prevent selecting note
-        if (confirm(`Delete note "${note.title}"?`)) {
-          delete folder.notes[note.id];
-
-          // Reset selection if deleted note was active
-          if (state.selectedNoteId === note.id) {
-            state.selectedNoteId = Object.keys(folder.notes)[0] || null;
-          }
-
-          saveState();
-          render();
-        }
-      };
-
-      li.appendChild(delBtn);
-      noteList.appendChild(li);
-    });
+    li.appendChild(delBtn);
+    noteList.appendChild(li);
+  });
 }
 
 function renderEditor() {
@@ -210,6 +222,13 @@ contentTextarea.addEventListener("input", () => {
   note.content = contentTextarea.value;
   note.updatedAt = Date.now();
   saveState();
+});
+
+noteSearch.addEventListener("input", () => {
+  const query = noteSearch.value.toLowerCase().trim();
+  state.searchQuery = query;
+  saveState();
+  renderNotes();
 });
 
 function getCurrentNote() {
