@@ -109,7 +109,7 @@ function renderNotes() {
     noteSearch.value = state.searchQuery;
     // Simple fuzzy filter: all query letters appear in order in title or content
     notes = notes.filter((note) =>
-      note.title.toLowerCase().includes(state.searchQuery),
+      note.title.toLowerCase().includes(state.searchQuery.toLowerCase().trim()),
     );
   }
 
@@ -225,7 +225,7 @@ contentTextarea.addEventListener("input", () => {
 });
 
 noteSearch.addEventListener("input", () => {
-  const query = noteSearch.value.toLowerCase().trim();
+  const query = noteSearch.value;
   state.searchQuery = query;
   saveState();
   renderNotes();
