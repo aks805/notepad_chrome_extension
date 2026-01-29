@@ -1,33 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <body>
+    <div id="app">
+      <!-- Folders -->
+      <div class="folders">
+        <button id="new-folder">+ Folder</button>
+        <ul id="folder-list"></ul>
+      </div>
 
-<body>
+      <!-- Notes -->
+      <div class="notes">
+        <button id="new-note">+ Note</button>
+        <input id="note-search" placeholder="Search" />
+        <ul id="note-list"></ul>
+      </div>
 
-  <div id="app">
-    <!-- Folders -->
-    <div class="folders">
-      <button id="new-folder">+ Folder</button>
-      <ul id="folder-list"></ul>
+      <div class="editor">
+        <input id="note-title" placeholder="Title" />
+        <textarea id="note-content" placeholder="Write..."></textarea>
+      </div>
     </div>
 
-    <!-- Notes -->
-    <div class="notes">
-      <button id="new-note">+ Note</button>
-      <ul id="note-list"></ul>
-    </div>
-
-    <div class="editor">
-      <input id="note-title" placeholder="Title" />
-      <textarea id="note-content" placeholder="Write..."></textarea>
-    </div>
-  </div>
-
-  <script src="popup.js"></script>
-</body>
-
+    <script src="popup.js"></script>
+  </body>
 </html>

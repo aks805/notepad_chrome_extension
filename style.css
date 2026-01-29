@@ -15,6 +15,8 @@ body {
   border-right: 1px solid #ddd;
   padding: 6px;
   box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .editor {
@@ -25,6 +27,19 @@ body {
   padding: 6px;
   box-sizing: border-box;
   margin: 6px;
+}
+
+#note-search {
+  width: 95%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 6px;
+  border-color: blue;
+}
+
+#note-title {
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 ul {
@@ -46,6 +61,7 @@ li.active {
 textarea {
   width: 100%;
   height: calc(100% - 32px);
+  border-radius: 4px;
 }
 
 button {
