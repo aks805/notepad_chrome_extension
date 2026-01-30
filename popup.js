@@ -244,4 +244,9 @@ function getCurrentFolder() {
   return undefined;
 }
 
+const foldersContainer = document.querySelector(".folders");
+document.getElementById("menu-btn").onclick = () => {
+  foldersContainer.classList.toggle("active");
+};
+
 loadState();

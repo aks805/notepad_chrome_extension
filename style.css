@@ -1,3 +1,9 @@
+.notes-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
 body {
   margin: 0;
   width: 600px;
@@ -10,7 +16,21 @@ body {
   height: 100%;
 }
 
-.folders, .notes {
+.folders {
+  display: none;
+  width: 150px;
+  border-right: 1px solid #ddd;
+  padding: 6px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.folders.active {
+  display: block;
+}
+
+.notes {
   width: 150px;
   border-right: 1px solid #ddd;
   padding: 6px;
