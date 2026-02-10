@@ -1,36 +1,35 @@
 <!doctype html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <div id="app">
-    <!-- Folders -->
-    <div class="folders">
-      <button id="new-folder">+ Folder</button>
-      <ul id="folder-list"></ul>
-    </div>
-
-    <!-- Notes -->
-    <div class="notes">
-      <div class="notes-header">
-        <button id="menu-btn" style="margin-right: 5px">☰</button>
-        <button id="new-note">+ Note</button>
+  <body>
+    <div id="app">
+      <!-- Folders -->
+      <div class="folders">
+        <button id="menu-btn-2" style="margin-right: 5px">☰ Folders</button>
+        <button id="new-folder">+ Folder</button>
+        <ul id="folder-list"></ul>
       </div>
-      <input id="note-search" placeholder="Search" />
-      <ul id="note-list"></ul>
+
+      <!-- Notes -->
+      <div class="notes">
+        <div class="notes-header">
+          <button id="menu-btn" style="margin-right: 5px">☰ Folders</button>
+          <button id="new-note">+ Note</button>
+        </div>
+        <input id="note-search" placeholder="Search" />
+        <ul id="note-list"></ul>
+      </div>
+
+      <div class="editor">
+        <input id="note-title" placeholder="Title" />
+        <textarea id="note-content" placeholder="Write..."></textarea>
+      </div>
     </div>
 
-    <div class="editor">
-      <input id="note-title" placeholder="Title" />
-      <textarea id="note-content" placeholder="Write..."></textarea>
-    </div>
-  </div>
-
-  <script src="popup.js"></script>
-</body>
-
+    <script src="popup.js"></script>
+  </body>
 </html>

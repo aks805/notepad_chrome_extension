@@ -245,8 +245,15 @@ function getCurrentFolder() {
 }
 
 const foldersContainer = document.querySelector(".folders");
+
 document.getElementById("menu-btn").onclick = () => {
   foldersContainer.classList.toggle("active");
+  document.getElementById("menu-btn").classList.toggle("active");
+};
+
+document.getElementById("menu-btn-2").onclick = () => {
+  foldersContainer.classList.toggle("active");
+  document.getElementById("menu-btn").classList.toggle("active");
 };
 
 loadState();
